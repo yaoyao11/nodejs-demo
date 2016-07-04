@@ -18,7 +18,7 @@ npm i -g express-generator
 （如果想本地安装在和npm同一个目录下，先cd到node_modules目录，再使用npm i express-generator命令，然后再将node_modules目录下的./bin配置到环境变量path里去）
 测试：
 express -V 成功的话会显示版本号
-3.mongodb：这个数据库安装很简单，下载地址http://www.mongodb.org/。安装好了，就在cmd里cd到mongodb安装目录下的bin目录，然后敲命令：
+3.mongodb：这个数据库安装很简单，下载地址http://www.mongodb.org/。安装好了，就在cmd里cd到mongodb安装目录下的bin目录，bin同级目录下新建data和logo文件夹，然后敲命令：
 mongod --dbpath="mongodb安装目录\data" --logpath="mongodb安装目录\log\log.txt" --install --serviceName MongoDB --serviceDisplayName MongoDB
 操作完，你会发现，你的电脑的服务里多了一个MongoDB服务，没错，就是它，然后你运行这个服务就行了。
 
@@ -49,6 +49,35 @@ db.createCollection("users") //创建一个集合，也就是表
 db.users.insert({userid: "admin", password: "123456"}) //给users里添加一个文档，也就是一条记录账号admin，密码123456
 ok，现在检查一下：
 db.users.find() //如果看到你刚刚添加的文档记录，就ok咯
+例如：
+D:\mongodb>bin\mongod.exe -dbpath="d:\mongodb\data" 进入数据库
+
+创建项目数据库
+C:\Users\Administrator>mongo
+MongoDB shell version: 3.2.7
+connecting to: test
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        http://docs.mongodb.org/
+Questions? Try the support group
+        http://groups.google.com/group/mongodb-user
+> use hell
+switched to db hell
+数据库创建账号
+> db.addUser("shuaige","123456")
+2016-07-01T09:57:54.213+0800 E QUERY    [thread1] TypeError: db.addUser is not a function :
+@(shell):1:1
+创建一个集合（表）
+> db.createCollection("users")
+{ "ok" : 1 }
+添加一条记录
+> db.users.insert({userid:"admin",password:"123456"})
+WriteResult({ "nInserted" : 1 })
+查看添加的文档记录
+> db.users.find()
+{ "_id" : ObjectId("5775d0ed79dd1e16ac432be7"), "userid" : "admin", "password" : "123456" }
+
 
 好简单的数据库集合以及文档设置好，我们就回到express创建的node项目里，我们需要：   
 
