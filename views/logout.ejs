@@ -1,0 +1,10 @@
+<% include header.ejs %>
+    <h1>Hello World</h1>
+    <p>Welcome to <%= title %></p>
+    <p>正在登出...</p>
+    <script type="text/javascript">
+      setTimeout(function(){
+        window.location.href = "/";
+      }, 500);
+    </script>
+<% include footer.ejs %>
